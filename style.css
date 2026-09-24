@@ -1,0 +1,266 @@
+:root {
+  --space: #020104;
+  --void: #000;
+  --violet: #5311b5;
+  --purple: #861fc1;
+  --magenta: #d426d7;
+  --pink: #ff4f91;
+  --hot: #fff1ff;
+  --size: min(50vw, 48vh, 470px);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: var(--space);
+}
+
+body {
+  min-height: 100svh;
+}
+
+.space {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  min-height: 32rem;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 50% 50%, #0c0515 0%, var(--space) 48%, #010102 100%);
+}
+
+.stars {
+  position: absolute;
+  inset: -100%;
+  width: 300%;
+  height: 300%;
+  background-repeat: repeat;
+  transform-origin: center;
+  animation: star-drift 80s linear infinite;
+}
+
+.stars-small {
+  opacity: 0.55;
+  background-image:
+    radial-gradient(circle, #fff 0 1px, transparent 1.2px),
+    radial-gradient(circle, #dcbbff 0 0.7px, transparent 1px),
+    radial-gradient(circle, #ff5b91 0 0.6px, transparent 0.9px);
+  background-size: 137px 163px, 211px 187px, 283px 251px;
+  background-position: 17px 29px, 81px 51px, 37px 109px;
+}
+
+.stars-medium {
+  opacity: 0.4;
+  background-image:
+    radial-gradient(circle, #f7efff 0 1.3px, transparent 1.7px),
+    radial-gradient(circle, #a982cc 0 1px, transparent 1.5px);
+  background-size: 317px 293px, 401px 367px;
+  background-position: 33px 73px, 187px 113px;
+  animation-duration: 125s;
+  animation-direction: reverse;
+}
+
+.stars-large {
+  opacity: 0.24;
+  filter: blur(0.4px);
+  background-image: radial-gradient(circle, #fff 0 1.8px, transparent 2.4px);
+  background-size: 487px 443px;
+  background-position: 91px 147px;
+  animation-duration: 170s;
+}
+
+.scene {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(var(--size) * 4.2);
+  height: calc(var(--size) * 2.25);
+  transform: translate(-50%, -50%) rotate(-8deg);
+  animation: scene-float 8s ease-in-out infinite;
+}
+
+.outer-glow,
+.accretion-disk,
+.photon-ring,
+.black-hole,
+.light-beam,
+.hot-spot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.outer-glow {
+  z-index: 1;
+  width: 92%;
+  height: 38%;
+  border-radius: 50%;
+  opacity: 0.7;
+  filter: blur(calc(var(--size) * 0.19));
+  background: radial-gradient(ellipse, #a820a27a 0%, #65146462 38%, transparent 72%);
+  animation: glow-pulse 4s ease-in-out infinite;
+}
+
+.accretion-disk {
+  width: 94%;
+  height: 18%;
+  border-radius: 50%;
+  background:
+    repeating-radial-gradient(ellipse at center,
+      transparent 0 5%, #ff78bc28 6% 7%, transparent 8% 12%),
+    conic-gradient(from 30deg,
+      transparent 0deg, var(--violet) 32deg, var(--magenta) 78deg,
+      #fff 103deg, var(--pink) 125deg, transparent 176deg,
+      #7a19c8 215deg, #f335a5 292deg, transparent 360deg);
+  filter: blur(calc(var(--size) * 0.018));
+  animation: disk-spin 5.5s linear infinite;
+}
+
+.disk-back {
+  z-index: 2;
+  opacity: 0.68;
+  box-shadow:
+    0 0 calc(var(--size) * 0.34) #d423b582,
+    inset 0 0 calc(var(--size) * 0.08) #fff;
+}
+
+.photon-ring {
+  z-index: 3;
+  width: calc(var(--size) * 1.1);
+  height: calc(var(--size) * 1.1);
+  border: calc(var(--size) * 0.025) solid var(--purple);
+  border-top-color: var(--pink);
+  border-right-color: #bc2fda;
+  border-radius: 50%;
+  filter: drop-shadow(0 0 calc(var(--size) * 0.07) #861adf);
+  animation: ring-pulse 3.4s ease-in-out infinite;
+}
+
+.photon-ring::before {
+  content: "";
+  position: absolute;
+  inset: calc(var(--size) * -0.065);
+  border: calc(var(--size) * 0.012) solid #d04aff5c;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  animation: orbit 4s linear infinite;
+}
+
+.black-hole {
+  z-index: 4;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background: radial-gradient(circle at 42% 38%, #030104 0 42%, var(--void) 72%);
+  box-shadow:
+    inset calc(var(--size) * -0.05) calc(var(--size) * -0.03) calc(var(--size) * 0.1) #0b0014,
+    0 0 calc(var(--size) * 0.08) #000;
+}
+
+.disk-front {
+  z-index: 5;
+  height: 9%;
+  opacity: 0.9;
+  clip-path: polygon(0 42%, 100% 0, 100% 58%, 0 100%);
+  filter: blur(calc(var(--size) * 0.01));
+  box-shadow: 0 0 calc(var(--size) * 0.24) #ed35b6;
+}
+
+.light-beam {
+  z-index: 6;
+  width: 96%;
+  height: calc(var(--size) * 0.018);
+  border-radius: 100%;
+  background: linear-gradient(90deg,
+    transparent 0%, #8a22c5 18%, var(--magenta) 34%,
+    var(--hot) 49%, var(--pink) 65%, #b526c9 82%, transparent 100%);
+  box-shadow:
+    0 0 calc(var(--size) * 0.05) var(--magenta),
+    0 0 calc(var(--size) * 0.12) #ad168c;
+  animation: beam-shimmer 2.8s ease-in-out infinite;
+}
+
+.hot-spot {
+  z-index: 7;
+  width: calc(var(--size) * 0.25);
+  height: calc(var(--size) * 0.028);
+  left: 62%;
+  border-radius: 50%;
+  background: #fff;
+  opacity: 0.72;
+  filter: blur(calc(var(--size) * 0.02));
+  animation: hot-orbit 4.4s ease-in-out infinite;
+}
+
+.vignette {
+  position: absolute;
+  z-index: 10;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at center, transparent 28%, #02010428 65%, #010102c7 120%);
+}
+
+@keyframes star-drift {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes scene-float {
+  0%, 100% { transform: translate(-50%, -50%) rotate(-8deg) scale(1); }
+  50% { transform: translate(-50%, calc(-50% - 8px)) rotate(-7deg) scale(1.015); }
+}
+
+@keyframes disk-spin {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes orbit {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes ring-pulse {
+  0%, 100% { opacity: 0.8; filter: drop-shadow(0 0 calc(var(--size) * 0.06) #861adf); }
+  50% { opacity: 1; filter: drop-shadow(0 0 calc(var(--size) * 0.11) #da2bd8); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.55; transform: translate(-50%, -50%) scale(0.96); }
+  50% { opacity: 0.84; transform: translate(-50%, -50%) scale(1.04); }
+}
+
+@keyframes beam-shimmer {
+  0%, 100% { opacity: 0.76; transform: translate(-50%, -50%) scaleX(0.96); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scaleX(1.02); }
+}
+
+@keyframes hot-orbit {
+  0%, 100% { left: 38%; opacity: 0.25; }
+  50% { left: 66%; opacity: 0.9; }
+}
+
+@media (max-width: 600px) {
+  :root {
+    --size: min(55vw, 34vh, 260px);
+  }
+
+  .scene {
+    width: calc(var(--size) * 4.6);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-play-state: paused !important;
+  }
+}
